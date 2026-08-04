@@ -1448,66 +1448,124 @@
       <section id="dev" class="section">
         <div class="page-header">
           <div>
-            <div class="page-title">开发进度跟踪</div>
-            <div class="page-subtitle">项目管理与任务追踪，让开发有条不紊</div>
+            <div class="page-title">2026冬季订货会开发进度</div>
+            <div class="page-subtitle">2026年6月冬季订货会 · 男鞋/女鞋/设计创意部 · 共11个阶段节点</div>
           </div>
         </div>
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-header"><span class="card-title">新建项目</span></div>
-            <div class="form-group">
-              <label class="form-label">项目名称</label>
-              <input type="text" class="form-input" id="devProjectName" placeholder="如：个人博客重构">
+
+        <!-- 阶段时间线 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><span class="card-title">阶段时间节点</span></div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">📋 设计企划完善</span>
+              <span class="tag tag-study">5月19日</span>
             </div>
-            <div class="form-group">
-              <label class="form-label">项目描述</label>
-              <input type="text" class="form-input" id="devProjectDesc" placeholder="简要描述项目目标...">
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">💻 系统占位</span>
+              <span class="tag tag-study">5月19日</span>
             </div>
-            <button class="btn btn-primary" onclick="addDevProject()">创建项目</button>
-          </div>
-          <div class="card">
-            <div class="card-header"><span class="card-title">项目列表</span></div>
-            <div id="devProjectList">
-              <div class="project-card">
-                <div class="project-header">
-                  <span class="project-name">🚀 个人工作台</span>
-                  <span class="project-status status-active">进行中</span>
-                </div>
-                <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">全功能个人管理仪表盘</div>
-                <div class="project-progress"><div class="project-progress-bar" style="width:65%"></div></div>
-                <div style="font-size:11px; color:var(--text-secondary); margin-top:6px;">进度 65%</div>
-              </div>
-              <div class="project-card">
-                <div class="project-header">
-                  <span class="project-name">📱 小程序开发</span>
-                  <span class="project-status status-paused">暂停</span>
-                </div>
-                <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">待办管理微信小程序</div>
-                <div class="project-progress"><div class="project-progress-bar" style="width:30%"></div></div>
-                <div style="font-size:11px; color:var(--text-secondary); margin-top:6px;">进度 30%</div>
-              </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🔍 开发计划评审</span>
+              <span class="tag tag-study">5月19日</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🎨 材料评审</span>
+              <span class="tag tag-work">5月29日</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">👟 楦底/款式评审</span>
+              <span class="tag tag-work">5月30-31日</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">📂 建档截止</span>
+              <span class="tag tag-life">6月15日 20:00</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🖨️ BOM打印截止</span>
+              <span class="tag tag-life">6月17日 20:00</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">👞 成品鞋截止</span>
+              <span class="tag tag-life">6月18日 20:00</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">✨ 研发选版</span>
+              <span class="tag tag-idea">6月19-20日</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🏪 会场陈列</span>
+              <span class="tag tag-idea">6月22日</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:8px 0;">
+              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🎉 订货会新品鉴会</span>
+              <span class="tag" style="background:var(--primary-soft);color:var(--primary-dark);">6月23日</span>
             </div>
           </div>
         </div>
+
+        <!-- 责任人清单 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><span class="card-title">阶段责任人</span></div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:13px;">
+              <div style="display:flex; align-items:center; gap:6px;"><span style="font-weight:600;color:var(--primary-dark);">季福武</span><span style="color:var(--text-secondary);">设计企划→材料评审 / BOM→成品鞋</span></div>
+              <div style="display:flex; align-items:center; gap:6px;"><span style="font-weight:600;color:var(--primary-dark);">樊鹏斌</span><span style="color:var(--text-secondary);">同上</span></div>
+            </div>
+            <div style="font-size:13px; display:flex; align-items:center; gap:6px;">
+              <span style="font-weight:600;color:var(--primary-dark);">毛玉敏</span>
+              <span style="color:var(--text-secondary);">楦底评审→建档截止（BOM打印截止→成品鞋截止）</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 部门进度表 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><span class="card-title">各部门开发进度</span></div>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:12px; white-space:nowrap;">
+              <thead>
+                <tr style="background:var(--bg-secondary);">
+                  <th style="padding:8px 6px; text-align:left; font-weight:600; border-bottom:2px solid var(--border);">品类</th>
+                  <th style="padding:8px 6px; text-align:left; font-weight:600; border-bottom:2px solid var(--border);">部门</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="设计企划完善">企划</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="系统占位">占位</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="开发计划评审">评审</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="材料评审">材料</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="楦底/款式评审">楦底</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="建档截止">建档</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="BOM打印截止">BOM</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="成品鞋截止">成品</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="研发选版">选版</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="会场陈列">陈列</th>
+                  <th style="padding:8px 4px; border-bottom:2px solid var(--border);" title="订货会新品鉴会">鉴会</th>
+                </tr>
+              </thead>
+              <tbody id="devProgressBody">
+                <!-- JS填充 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 注意事项 -->
         <div class="card">
-          <div class="card-header"><span class="card-title">任务看板</span></div>
-          <div class="kanban">
-            <div class="kanban-col">
-              <div class="kanban-col-title">待办</div>
-              <div class="kanban-item">设计饮品模块 UI</div>
-              <div class="kanban-item">接入天气 API</div>
-              <div class="kanban-item">数据持久化优化</div>
+          <div class="card-header"><span class="card-title">⚠️ 注意事项</span></div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="font-size:12px; padding:8px 10px; background:#FFF8E1; border-radius:8px; line-height:1.6;">
+              <strong>楦底评审时</strong>各部门以最终正确的楦、底、款呈现；楦底完成率≥80%且款完成率≥60%为合格
             </div>
-            <div class="kanban-col">
-              <div class="kanban-col-title">进行中</div>
-              <div class="kanban-item">首页 Dashboard 布局</div>
-              <div class="kanban-item">鞋类商务英语词库</div>
+            <div style="font-size:12px; padding:8px 10px; background:#FFF8E1; border-radius:8px; line-height:1.6;">
+              <strong>理完版后</strong>商品团队组织试穿人员2-3人，对所有上会样品鞋试穿，每只≥15秒
             </div>
-            <div class="kanban-col">
-              <div class="kanban-col-title">已完成</div>
-              <div class="kanban-item">整体框架搭建</div>
-              <div class="kanban-item">导航栏交互</div>
-              <div class="kanban-item">配色方案确定</div>
+            <div style="font-size:12px; padding:8px 10px; background:#FFF8E1; border-radius:8px; line-height:1.6;">
+              <strong>材料注意</strong>大面积使用超纤，PLM系统不予通过；鞋底参数（材料、重量）须评审通过后才能过系统
+            </div>
+            <div style="font-size:12px; padding:8px 10px; background:#FFF3E0; border-radius:8px; line-height:1.6;">
+              <strong>系统规范</strong>产品信息部及业务人资部不定期抽查各环节系统完成进度与实际完成进度是否一致
+            </div>
+            <div style="font-size:12px; padding:8px 10px; background:#F3E5F5; border-radius:8px; line-height:1.6;">
+              <strong>建档截止→成品鞋截止</strong>截止时间均为当天 <strong>20:00</strong>，逾期按PLM系统操作规定处罚
             </div>
           </div>
         </div>
@@ -1760,11 +1818,14 @@
     }
 
     // ========== INIT ==========
+    function bjNow() { return new Date((new Date()).toLocaleString('en-US', {timeZone: 'Asia/Shanghai'})); }
+    function bjDateStr() { const d = bjNow(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+    function bjTimeStr() { const d = bjNow(); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+    function bjDateDisplay() { const d = bjNow(); const weekdays = ['周日','周一','周二','周三','周四','周五','周六']; return `${d.getMonth()+1}月${d.getDate()}日 · ${weekdays[d.getDay()]}`; }
+
     function init() {
-      // Date
-      const now = new Date();
-      const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
-      const dateStr = `${now.getMonth()+1}月${now.getDate()}日 · ${weekdays[now.getDay()]}`;
+      // Date - 北京时间
+      const dateStr = bjDateDisplay();
       document.getElementById('welcomeDate').textContent = dateStr;
       document.getElementById('homeDateBadge').textContent = dateStr;
       document.getElementById('welcomeDateText').textContent = dateStr;
@@ -1792,12 +1853,29 @@
       updateDrinkStats();
       renderShoes();
       fetchWeather();
+      renderDevProgress();
       if (data.directorNotes) renderDirectorNotes();
       if (data.reports) renderReports();
       if (data.ideas) renderIdeas();
       if (data.projects) renderDevProjects();
       renderDestinations();
       applyAppleEmojis();
+
+      // 实时时钟：每分钟刷新日期显示
+      function tickClock() {
+        const d = bjNow();
+        const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+        const dateStr = `${d.getMonth()+1}月${d.getDate()}日 · ${weekdays[d.getDay()]}`;
+        const el = document.getElementById('welcomeDate');
+        if (el) el.textContent = dateStr;
+        const el2 = document.getElementById('homeDateBadge');
+        if (el2) el2.textContent = dateStr;
+      }
+      tickClock();
+      setInterval(tickClock, 60000);
+
+      // 天气自动刷新：每30分钟
+      setInterval(fetchWeather, 30 * 60 * 1000);
     }
 
     // ========== HOME ==========
@@ -2295,6 +2373,45 @@
       return '⛅';
     }
 
+    // ========== DEV PROGRESS TABLE ==========
+    const devDepartments = [
+      { cat: '男鞋', dept: '轻休闲部' },
+      { cat: '男鞋', dept: '商务正装部' },
+      { cat: '男鞋', dept: '运动休闲部' },
+      { cat: '男鞋', dept: '时尚潮流部' },
+      { cat: '女鞋', dept: '时装部' },
+      { cat: '女鞋', dept: '都市部' },
+      { cat: '女鞋', dept: '运动休闲部' },
+      { cat: '女鞋', dept: '时尚潮流部' },
+      { cat: '—', dept: '设计创意部' },
+    ];
+
+    function renderDevProgress() {
+      const stages = ['企划','占位','评审','材料','楦底','建档','BOM','成品','选版','陈列','鉴会'];
+      const tbody = document.getElementById('devProgressBody');
+      if (!tbody) return;
+      tbody.innerHTML = devDepartments.map(row => `
+        <tr>
+          <td style="padding:6px 6px; border-bottom:1px solid var(--border); font-weight:500;">${row.cat}</td>
+          <td style="padding:6px 6px; border-bottom:1px solid var(--border);">${row.dept}</td>
+          ${stages.map(() => `<td style="padding:6px 4px; border-bottom:1px solid var(--border); text-align:center;">
+            <label style="display:flex; justify-content:center; cursor:pointer;">
+              <input type="checkbox" style="width:14px; height:14px; cursor:pointer;" onchange="saveDevProgress(this)">
+            </label>
+          </td>`).join('')}
+        </tr>
+      `).join('');
+    }
+
+    function saveDevProgress(cb) {
+      if (!data.devProgress) data.devProgress = {};
+      const row = cb.closest('tr');
+      const cells = row.querySelectorAll('input[type=checkbox]');
+      const dept = row.cells[1].textContent.trim();
+      data.devProgress[dept] = Array.from(cells).map(c => c.checked);
+      saveData();
+    }
+
     function changeCity() {
       const city = prompt('请输入城市名称：', data.city);
       if (city) {
@@ -2391,14 +2508,8 @@
     }
 
     // ========== UTILS ==========
-    function todayStr() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
-    function nowStr() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-    }
+    function todayStr() { return bjDateStr(); }
+    function nowStr() { return `${bjDateStr()} ${bjTimeStr()}`; }
     function escapeHtml(s) {
       const div = document.createElement('div');
       div.textContent = s;
