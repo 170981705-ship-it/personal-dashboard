@@ -16,6 +16,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    // 立即计算北京时间（页面渲染前）
+    window.BJ_NOW = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));
+    window.BJ_WEEKDAY = ['周日','周一','周二','周三','周四','周五','周六'][window.BJ_NOW.getDay()];
+    window.BJ_DATE_STR = (window.BJ_NOW.getMonth()+1)+'月'+window.BJ_NOW.getDate()+'日 · '+window.BJ_WEEKDAY;
+  </script>
   <style>
     :root {
       --primary: #7B93A4;
@@ -641,7 +647,7 @@
       <!-- HOME -->
       <section id="home" class="section active">
         <div class="welcome-banner">
-          <div class="welcome-date" id="welcomeDate">--月--日 · --</div>
+          <div class="welcome-date" id="welcomeDate"><script>document.write(window.BJ_DATE_STR)</script></div>
           <div class="welcome-name">嗨，<span id="welcomeName">朋友</span> 👋</div>
           <div class="welcome-quote">不必羡慕别人，你也在成为更好的路上。<br>今天也要好好吃饭、好好流汗。</div>
           <div class="welcome-progress">
@@ -2318,19 +2324,21 @@
         document.getElementById('weatherDesc').textContent =
           (cur.lang_zh ? cur.lang_zh[0].value : cur.weatherDesc[0].value) + ' · 体感';
 
-        // Forecast - 使用北京时间计算星期
+        // Forecast - 使用API返回的日期字符串直接计算星期（避免时区问题）
         const forecastRow = document.querySelector('.forecast-row');
         if (forecastRow && d.weather) {
           const days = d.weather.slice(0, 6);
           const ws = ['周日','周一','周二','周三','周四','周五','周六'];
-          const getWeekday = (dateStr) => {
-            const d = new Date(new Date(dateStr).toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));
-            return ws[d.getDay()];
+          // 解析 YYYY-MM-DD 格式，按本地时间处理（wttr.in返回的是当地时间）
+          const parseLocalDate = (str) => {
+            const [y, m, d] = str.split('-').map(Number);
+            return new Date(y, m-1, d); // 月份是0-based
           };
           forecastRow.innerHTML =
             '<div class="forecast-day"><div class="day">今天</div><div class="icon">' + getWeatherIcon(cur.weatherCode) + '</div><div class="temp">' + cur.temp_C + '°</div></div>' +
-            days.map((w, i) => {
-              return '<div class="forecast-day"><div class="day">' + getWeekday(w.date) + '</div><div class="icon">' + getWeatherIcon(w.hourly[4].weatherCode) + '</div><div class="temp">' + w.maxtempC + '°/' + w.mintempC + '°</div></div>';
+            days.map((w) => {
+              const dayIndex = parseLocalDate(w.date).getDay();
+              return '<div class="forecast-day"><div class="day">' + ws[dayIndex] + '</div><div class="icon">' + getWeatherIcon(w.hourly[4].weatherCode) + '</div><div class="temp">' + w.maxtempC + '°/' + w.mintempC + '°</div></div>';
             }).join('');
         }
       } catch(e) {
@@ -2680,14 +2688,6 @@
       console.error('[Unhandled Promise]:', e.reason);
     });
 
-    // 立即更新欢迎页日期（北京时区）
-    (function(){
-      const d = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));
-      const w = ['周日','周一','周二','周三','周四','周五','周六'];
-      const str = (d.getMonth()+1)+'月'+d.getDate()+'日 · '+w[d.getDay()];
-      const el = document.getElementById('welcomeDate');
-      if (el) el.textContent = str;
-    })();
   </script>
 </body>
 </html>
