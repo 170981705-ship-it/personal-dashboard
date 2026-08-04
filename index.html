@@ -1448,59 +1448,23 @@
       <section id="dev" class="section">
         <div class="page-header">
           <div>
-            <div class="page-title">2026冬季订货会开发进度</div>
-            <div class="page-subtitle">2026年6月冬季订货会 · 男鞋/女鞋/设计创意部 · 共11个阶段节点</div>
+            <div class="page-title">开发进度管理</div>
+            <div class="page-subtitle">可编辑的项目时间节点 · 自动提醒（提前2天）</div>
           </div>
+          <button class="btn btn-primary" onclick="showDevEditModal()">✏️ 编辑项目</button>
         </div>
 
-        <!-- 阶段时间线 -->
+        <!-- 即将到期提醒 -->
+        <div id="devAlerts" style="margin-bottom:16px;"></div>
+
+        <!-- 阶段时间线（可编辑显示） -->
         <div class="card" style="margin-bottom:20px;">
-          <div class="card-header"><span class="card-title">阶段时间节点</span></div>
-          <div style="display:flex; flex-direction:column; gap:8px;">
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">📋 设计企划完善</span>
-              <span class="tag tag-study">5月19日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">💻 系统占位</span>
-              <span class="tag tag-study">5月19日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🔍 开发计划评审</span>
-              <span class="tag tag-study">5月19日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🎨 材料评审</span>
-              <span class="tag tag-work">5月29日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">👟 楦底/款式评审</span>
-              <span class="tag tag-work">5月30-31日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">📂 建档截止</span>
-              <span class="tag tag-life">6月15日 20:00</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🖨️ BOM打印截止</span>
-              <span class="tag tag-life">6月17日 20:00</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">👞 成品鞋截止</span>
-              <span class="tag tag-life">6月18日 20:00</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">✨ 研发选版</span>
-              <span class="tag tag-idea">6月19-20日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🏪 会场陈列</span>
-              <span class="tag tag-idea">6月22日</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px; padding:8px 0;">
-              <span style="font-size:12px; color:var(--text-secondary); width:110px;">🎉 订货会新品鉴会</span>
-              <span class="tag" style="background:var(--primary-soft);color:var(--primary-dark);">6月23日</span>
-            </div>
+          <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="card-title">阶段时间节点</span>
+            <span style="font-size:11px; color:var(--text-secondary);">点击编辑按钮修改</span>
+          </div>
+          <div id="devTimelineList" style="display:flex; flex-direction:column; gap:8px;">
+            <!-- JS动态渲染 -->
           </div>
         </div>
 
@@ -1566,6 +1530,21 @@
             </div>
             <div style="font-size:12px; padding:8px 10px; background:#F3E5F5; border-radius:8px; line-height:1.6;">
               <strong>建档截止→成品鞋截止</strong>截止时间均为当天 <strong>20:00</strong>，逾期按PLM系统操作规定处罚
+            </div>
+          </div>
+        </div>
+
+        <!-- 编辑弹窗 -->
+        <div id="devEditModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
+          <div style="background:white; border-radius:16px; width:90%; max-width:600px; max-height:80vh; overflow:auto; padding:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <h3 style="margin:0; font-size:18px;">编辑项目节点</h3>
+              <button onclick="closeDevEditModal()" style="background:none; border:none; font-size:20px; cursor:pointer;">×</button>
+            </div>
+            <div id="devEditList" style="display:flex; flex-direction:column; gap:10px;"></div>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <button class="btn btn-primary" onclick="saveDevEdit()" style="flex:1;">保存</button>
+              <button class="btn btn-soft" onclick="closeDevEditModal()" style="flex:1;">取消</button>
             </div>
           </div>
         </div>
@@ -1854,6 +1833,8 @@
       renderShoes();
       fetchWeather();
       renderDevProgress();
+      renderDevTimeline();
+      renderDevAlerts();
       if (data.directorNotes) renderDirectorNotes();
       if (data.reports) renderReports();
       if (data.ideas) renderIdeas();
@@ -1862,15 +1843,6 @@
       applyAppleEmojis();
 
       // 实时时钟：每分钟刷新日期显示
-      function tickClock() {
-        const d = bjNow();
-        const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
-        const dateStr = `${d.getMonth()+1}月${d.getDate()}日 · ${weekdays[d.getDay()]}`;
-        const el = document.getElementById('welcomeDate');
-        if (el) el.textContent = dateStr;
-        const el2 = document.getElementById('homeDateBadge');
-        if (el2) el2.textContent = dateStr;
-      }
       tickClock();
       setInterval(tickClock, 60000);
 
@@ -2386,6 +2358,117 @@
       { cat: '—', dept: '设计创意部' },
     ];
 
+    // 默认项目节点配置
+    function getDefaultDevMilestones() {
+      return [
+        { id: 'm1', name: '📋 设计企划完善', date: '2026-05-19', time: '', alert: true },
+        { id: 'm2', name: '💻 系统占位', date: '2026-05-19', time: '', alert: true },
+        { id: 'm3', name: '🔍 开发计划评审', date: '2026-05-19', time: '', alert: true },
+        { id: 'm4', name: '🎨 材料评审', date: '2026-05-29', time: '', alert: true },
+        { id: 'm5', name: '👟 楦底/款式评审', date: '2026-05-30', time: '', alert: true },
+        { id: 'm6', name: '📂 建档截止', date: '2026-06-15', time: '20:00', alert: true },
+        { id: 'm7', name: '🖨️ BOM打印截止', date: '2026-06-17', time: '20:00', alert: true },
+        { id: 'm8', name: '👞 成品鞋截止', date: '2026-06-18', time: '20:00', alert: true },
+        { id: 'm9', name: '✨ 研发选版', date: '2026-06-19', time: '', alert: true },
+        { id: 'm10', name: '🏪 会场陈列', date: '2026-06-22', time: '', alert: true },
+        { id: 'm11', name: '🎉 订货会新品鉴会', date: '2026-06-23', time: '', alert: true },
+      ];
+    }
+
+    function getDevMilestones() {
+      return data.devMilestones || getDefaultDevMilestones();
+    }
+
+    function renderDevTimeline() {
+      const list = document.getElementById('devTimelineList');
+      if (!list) return;
+      const milestones = getDevMilestones();
+      const today = bjDateStr();
+      list.innerHTML = milestones.map(m => {
+        const daysLeft = Math.ceil((new Date(m.date) - new Date(today)) / (1000*60*60*24));
+        let badge = '';
+        if (daysLeft < 0) badge = '<span class="tag" style="background:#eee;color:#999;">已过期</span>';
+        else if (daysLeft === 0) badge = '<span class="tag" style="background:#ff5252;color:white;">今天</span>';
+        else if (daysLeft <= 2) badge = `<span class="tag" style="background:#ff9800;color:white;">剩${daysLeft}天</span>`;
+        else badge = `<span class="tag tag-study">${m.date.slice(5).replace('-','月')}日${m.time?' '+m.time:''}</span>`;
+        return `
+          <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid var(--border);">
+            <span style="font-size:12px; color:var(--text-secondary); width:140px;">${m.name}</span>
+            ${badge}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderDevAlerts() {
+      const container = document.getElementById('devAlerts');
+      if (!container) return;
+      const milestones = getDevMilestones();
+      const today = bjDateStr();
+      const alerts = milestones.filter(m => m.alert).map(m => {
+        const daysLeft = Math.ceil((new Date(m.date) - new Date(today)) / (1000*60*60*24));
+        if (daysLeft >= 0 && daysLeft <= 2) {
+          return { name: m.name, days: daysLeft, date: m.date };
+        }
+        return null;
+      }).filter(Boolean);
+      if (alerts.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      container.innerHTML = `
+        <div style="background:#fff3e0; border:1px solid #ffcc80; border-radius:12px; padding:12px 16px;">
+          <div style="font-weight:600; color:#e65100; margin-bottom:6px;">⏰ 即将到期提醒</div>
+          ${alerts.map(a => `
+            <div style="font-size:13px; color:#bf360c; margin:4px 0;">
+              ${a.name} · ${a.days === 0 ? '今天到期' : `还剩 ${a.days} 天`} · ${a.date}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function showDevEditModal() {
+      const modal = document.getElementById('devEditModal');
+      const list = document.getElementById('devEditList');
+      const milestones = getDevMilestones();
+      list.innerHTML = milestones.map((m, i) => `
+        <div style="display:flex; gap:8px; align-items:center;">
+          <input type="text" class="form-input" id="dev-name-${i}" value="${m.name.replace(/"/g,'&quot;')}" style="flex:1;" placeholder="节点名称">
+          <input type="date" class="form-input" id="dev-date-${i}" value="${m.date}" style="width:130px;">
+          <input type="time" class="form-input" id="dev-time-${i}" value="${m.time}" style="width:90px;">
+          <label style="display:flex; align-items:center; gap:4px; font-size:12px; white-space:nowrap;">
+            <input type="checkbox" id="dev-alert-${i}" ${m.alert ? 'checked' : ''}> 提醒
+          </label>
+        </div>
+      `).join('');
+      modal.style.display = 'flex';
+    }
+
+    function closeDevEditModal() {
+      document.getElementById('devEditModal').style.display = 'none';
+    }
+
+    function saveDevEdit() {
+      const milestones = [];
+      for (let i = 0; i < 20; i++) {
+        const name = document.getElementById(`dev-name-${i}`);
+        if (!name) break;
+        milestones.push({
+          id: `m${i+1}`,
+          name: name.value,
+          date: document.getElementById(`dev-date-${i}`).value,
+          time: document.getElementById(`dev-time-${i}`).value,
+          alert: document.getElementById(`dev-alert-${i}`).checked
+        });
+      }
+      data.devMilestones = milestones;
+      saveData();
+      renderDevTimeline();
+      renderDevAlerts();
+      closeDevEditModal();
+    }
+
     function renderDevProgress() {
       const stages = ['企划','占位','评审','材料','楦底','建档','BOM','成品','选版','陈列','鉴会'];
       const tbody = document.getElementById('devProgressBody');
@@ -2510,6 +2593,15 @@
     // ========== UTILS ==========
     function todayStr() { return bjDateStr(); }
     function nowStr() { return `${bjDateStr()} ${bjTimeStr()}`; }
+    function tickClock() {
+      const d = bjNow();
+      const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+      const dateStr = `${d.getMonth()+1}月${d.getDate()}日 · ${weekdays[d.getDay()]}`;
+      const el = document.getElementById('welcomeDate');
+      if (el) el.textContent = dateStr;
+      const el2 = document.getElementById('homeDateBadge');
+      if (el2) el2.textContent = dateStr;
+    }
     function escapeHtml(s) {
       const div = document.createElement('div');
       div.textContent = s;
