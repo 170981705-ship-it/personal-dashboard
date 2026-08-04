@@ -356,6 +356,7 @@
     }
     .shoe-name { font-size: 13px; font-weight: 500; }
     .shoe-brand { font-size: 11px; color: var(--text-secondary); }
+    .shoe-delete { z-index: 5; }
 
     /* AI Tools */
     .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
@@ -616,13 +617,9 @@
         <span class="icon">📊</span>
         <span class="label">汇报</span>
       </div>
-      <div class="nav-item" data-section="aitools" onclick="showSection('aitools')">
-        <span class="icon">🤖</span>
-        <span class="label">AI工具</span>
-      </div>
       <div class="nav-item" data-section="travel" onclick="showSection('travel')">
         <span class="icon">✈️</span>
-        <span class="label">旅行</span>
+        <span class="label">出差</span>
       </div>
       <div class="nav-item" data-section="weather" onclick="showSection('weather')">
         <span class="icon">🌤️</span>
@@ -995,66 +992,50 @@
         <div class="page-header">
           <div>
             <div class="page-title">饮品记录</div>
-            <div class="page-subtitle">全品牌饮品库，每款标注热量+售价，自动汇总月消费</div>
+            <div class="page-subtitle">记录每一次品饮，自动汇总月消费与热量</div>
           </div>
         </div>
         <div class="card">
           <div style="background: var(--primary-soft); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 13px; color: var(--text-secondary);">
-            💡 喜茶/茶百道/蜜雪等为门店参考价；瑞幸为常见券后价（9.9 / 11.9 / 13.9 等）。实际以下单页/外卖平台/当地门店活动为准（常有误差）。
+            💡 品牌和饮品均可自定义输入，灵活记录任意饮品。
           </div>
           <div class="grid-2">
             <div>
               <div class="form-group">
-                <label class="form-label">选择品牌</label>
-                <select class="form-select" id="drinkBrand" onchange="updateDrinkMenu()">
-                  <option value="喜茶">🍵 喜茶</option>
-                  <option value="奈雪">🍓 奈雪的茶</option>
-                  <option value="瑞幸">☕ 瑞幸咖啡</option>
-                  <option value="星巴克">🌟 星巴克</option>
-                  <option value="茶百道">🧋 茶百道</option>
-                  <option value="蜜雪">❄️ 蜜雪冰城</option>
-                  <option value="Manner">☕ Manner</option>
-                  <option value="其他">🥤 其他</option>
-                </select>
+                <label class="form-label">品牌 / 名称</label>
+                <input type="text" class="form-input" id="drinkBrandInput" placeholder="如：雪花勇闯天涯、1664、乌苏..." oninput="updateDrinkCalc()">
               </div>
               <div class="form-group">
-                <label class="form-label">选择饮品</label>
-                <select class="form-select" id="drinkItem">
-                  <option>烤黑糖波波牛乳茶</option>
-                  <option>多肉葡萄</option>
-                  <option>芋泥波波奶茶</option>
-                  <option>芝士茗茶</option>
-                </select>
+                <label class="form-label">饮品名称</label>
+                <input type="text" class="form-input" id="drinkItemInput" placeholder="如：勇闯天涯330ml、精酿IPA 500ml...">
+              </div>
+              <div style="display:flex; gap:12px;">
+                <div class="form-group" style="flex:1;">
+                  <label class="form-label">单价 ¥</label>
+                  <input type="number" class="form-input" id="drinkPriceInput" placeholder="0" value="0" oninput="updateDrinkCalc()">
+                </div>
+                <div class="form-group" style="flex:1;">
+                  <label class="form-label">热量 kcal</label>
+                  <input type="number" class="form-input" id="drinkCalInput" placeholder="0" value="0" oninput="updateDrinkCalc()">
+                </div>
               </div>
               <div class="form-group">
-                <label class="form-label">糖分/冰度</label>
-                <select class="form-select" id="drinkSugar">
-                  <option>标准糖</option>
-                  <option>少糖 (-25%)</option>
-                  <option>微糖 (-40%)</option>
-                  <option>无糖 (-60%)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">杯型容量</label>
-                <select class="form-select" id="drinkSize">
-                  <option value="中杯">中杯 500ml</option>
-                  <option value="大杯">大杯 700ml</option>
-                </select>
+                <label class="form-label">备注</label>
+                <input type="text" class="form-input" id="drinkNoteInput" placeholder="可选：如"瓶装"、"大杯"、"加冰"...">
               </div>
             </div>
             <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
               <div class="drink-result">
                 <div class="drink-stat">
-                  <div class="num" id="drinkCal">312</div>
+                  <div class="num" id="drinkCal">0</div>
                   <div class="unit">热量 kcal</div>
                 </div>
                 <div class="drink-stat">
-                  <div class="num" id="drinkPrice">21</div>
+                  <div class="num" id="drinkPrice">0</div>
                   <div class="unit">售价 ¥</div>
                 </div>
               </div>
-              <button class="btn btn-primary" style="width:100%; max-width:280px;" onclick="recordDrink()">记录这杯 🧋</button>
+              <button class="btn btn-primary" style="width:100%; max-width:280px;" onclick="recordDrink()">记录这杯 🍺</button>
             </div>
           </div>
         </div>
@@ -1070,7 +1051,7 @@
         </div>
         <div class="card">
           <div class="card-header"><span class="card-title">本月记录</span></div>
-          <div id="drinkHistoryList" class="drink-history">今天还没喝奶茶哦~</div>
+          <div id="drinkHistoryList" class="drink-history">今天还没喝东西哦~</div>
         </div>
       </section>
 
@@ -1087,7 +1068,14 @@
         <!-- 鞋款收藏 -->
         <div class="card" style="margin-bottom:24px;">
           <div class="card-header"><span class="card-title">鞋款收藏</span></div>
-          <div style="display:flex; gap:10px; margin-bottom:16px;">
+          <div style="display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:flex-end;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <label class="form-label" style="font-size:12px;">鞋款图片（可选）</label>
+              <label id="shoeImgLabel" style="width:60px;height:60px;border:2px dashed var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;color:var(--text-light);transition:var(--transition);background:var(--bg);" title="点击上传图片">
+                📷
+                <input type="file" accept="image/*" id="shoeImgInput" style="display:none;" onchange="handleShoeImgUpload(this)">
+              </label>
+            </div>
             <input type="text" class="form-input" id="shoeNameInput" placeholder="鞋款名称" style="flex:2;">
             <input type="text" class="form-input" id="shoeBrandInput" placeholder="品牌" style="flex:1;">
             <button class="btn btn-primary" onclick="addShoe()">添加</button>
@@ -1132,99 +1120,111 @@
           <div id="shoeWordList">
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">upper</span><span class="word-phonetic">/ˈʌpər/</span></div>
                 <div class="word-pos">n. 鞋面</div>
                 <div class="word-example">The upper is made of premium full-grain leather.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">outsole</span><span class="word-phonetic">/ˈaʊtsoʊl/</span></div>
                 <div class="word-pos">n. 外底，大底</div>
                 <div class="word-example">The rubber outsole provides excellent traction.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">midsole</span><span class="word-phonetic">/ˈmɪdsoʊl/</span></div>
                 <div class="word-pos">n. 中底</div>
                 <div class="word-example">The EVA midsole offers superior cushioning and rebound.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">insole</span><span class="word-phonetic">/ˈɪnsoʊl/</span></div>
                 <div class="word-pos">n. 鞋垫，内底</div>
                 <div class="word-example">The memory foam insole molds to your foot shape.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">cushioning</span><span class="word-phonetic">/ˈkʊʃənɪŋ/</span></div>
                 <div class="word-pos">n. 缓震，缓冲</div>
                 <div class="word-example">The Zoom Air cushioning system delivers responsive energy return.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">breathable</span><span class="word-phonetic">/ˈbriːðəbl/</span></div>
                 <div class="word-pos">adj. 透气的</div>
                 <div class="word-example">The knit upper is highly breathable for summer wear.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">waterproof</span><span class="word-phonetic">/ˈwɔːtərpruːf/</span></div>
                 <div class="word-pos">adj. 防水的</div>
                 <div class="word-example">The GORE-TEX membrane makes the shoe fully waterproof.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">durability</span><span class="word-phonetic">/ˌdjʊərəˈbɪləti/</span></div>
                 <div class="word-pos">n. 耐用性，耐久度</div>
                 <div class="word-example">The carbon rubber outsole significantly improves durability.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">stitching</span><span class="word-phonetic">/ˈstɪtʃɪŋ/</span></div>
                 <div class="word-pos">n. 缝线，车线</div>
                 <div class="word-example">Double stitching reinforces high-stress areas of the shoe.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">arch support</span><span class="word-phonetic">/ɑːrtʃ səˈpɔːrt/</span></div>
                 <div class="word-pos">n. 足弓支撑</div>
                 <div class="word-example">This model features enhanced arch support for flat feet.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">heel counter</span><span class="word-phonetic">/hiːl ˈkaʊntər/</span></div>
                 <div class="word-pos">n. 后跟稳定片</div>
                 <div class="word-example">An external heel counter locks your foot in place.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
             <div class="word-card">
               <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div>
+              <div style="flex:1;">
                 <div><span class="word-title">flex groove</span><span class="word-phonetic">/fleks ɡruːv/</span></div>
                 <div class="word-pos">n. 弯折槽</div>
                 <div class="word-example">Deep flex grooves allow natural forefoot motion.</div>
               </div>
+              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
             </div>
           </div>
         </div>
@@ -1241,21 +1241,30 @@
 
         <div class="card" style="margin-bottom:20px;">
           <div class="card-header"><span class="card-title">记录分享</span></div>
-          <div style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;">
-            <select class="form-select" id="directorSource" style="flex:1; min-width:120px;">
-              <option value="董助">👤 董助（常用）</option>
-              <option value="总裁">👤 总裁</option>
-            </select>
-            <select class="form-select" id="directorType" style="flex:1; min-width:120px;">
-              <option value="鞋款分享">👟 鞋款分享</option>
-              <option value="开发建议">🔧 开发建议</option>
-              <option value="市场趋势">📈 市场趋势</option>
-              <option value="其他">📌 其他</option>
-            </select>
-            <input type="text" class="form-input" id="directorTitleInput" placeholder="简要标题" style="flex:2;">
-          </div>
-          <div style="display:flex; gap:10px; margin-bottom:14px;">
-            <textarea class="form-textarea" id="directorContentInput" placeholder="详细内容..." style="flex:1;" rows="2"></textarea>
+          <div style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; align-items:flex-end;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <label class="form-label" style="font-size:12px;">鞋款图片（可选）</label>
+              <label id="directorImgLabel" style="width:64px;height:64px;border:2px dashed var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;color:var(--text-light);transition:var(--transition);background:var(--bg);" title="点击上传图片">
+                📷
+                <input type="file" accept="image/*" id="directorImgInput" style="display:none;" onchange="handleDirectorImgUpload(this)">
+              </label>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; gap:10px;">
+                <select class="form-select" id="directorSource" style="flex:1; min-width:100px;">
+                  <option value="董助">👤 董助（常用）</option>
+                  <option value="总裁">👤 总裁</option>
+                </select>
+                <select class="form-select" id="directorType" style="flex:1; min-width:100px;">
+                  <option value="鞋款分享">👟 鞋款分享</option>
+                  <option value="开发建议">🔧 开发建议</option>
+                  <option value="市场趋势">📈 市场趋势</option>
+                  <option value="其他">📌 其他</option>
+                </select>
+                <input type="text" class="form-input" id="directorTitleInput" placeholder="简要标题" style="flex:2;">
+              </div>
+              <textarea class="form-textarea" id="directorContentInput" placeholder="详细内容..." style="flex:1;" rows="2"></textarea>
+            </div>
           </div>
           <button class="btn btn-primary" onclick="addDirectorNote()">记录</button>
         </div>
@@ -1291,98 +1300,18 @@
         <div id="reportList"></div>
       </section>
 
-      <!-- AI TOOLS -->
-      <section id="aitools" class="section">
-        <div class="page-header">
-          <div>
-            <div class="page-title">AI 工具箱</div>
-            <div class="page-subtitle">常用 AI 工具导航，提升效率的利器</div>
-          </div>
-        </div>
-        <div class="tool-grid">
-          <div class="tool-card" onclick="window.open('https://chat.openai.com','_blank')">
-            <div class="tool-icon">💬</div>
-            <div class="tool-name">ChatGPT</div>
-            <div class="tool-desc">OpenAI 对话模型，通用问答与写作</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://claude.ai','_blank')">
-            <div class="tool-icon">🧠</div>
-            <div class="tool-name">Claude</div>
-            <div class="tool-desc">Anthropic 长文本与推理助手</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://gemini.google.com','_blank')">
-            <div class="tool-icon">✨</div>
-            <div class="tool-name">Gemini</div>
-            <div class="tool-desc">Google 多模态 AI 助手</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://www.midjourney.com','_blank')">
-            <div class="tool-icon">🎨</div>
-            <div class="tool-name">Midjourney</div>
-            <div class="tool-desc">AI 图像生成，艺术创作</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://github.com/features/copilot','_blank')">
-            <div class="tool-icon">💻</div>
-            <div class="tool-name">GitHub Copilot</div>
-            <div class="tool-desc">AI 编程助手，代码补全</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://www.perplexity.ai','_blank')">
-            <div class="tool-icon">🔍</div>
-            <div class="tool-name">Perplexity</div>
-            <div class="tool-desc">AI 搜索引擎，带引用来源</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://notion.so','_blank')">
-            <div class="tool-icon">📝</div>
-            <div class="tool-name">Notion AI</div>
-            <div class="tool-desc">笔记与知识库，内置 AI 写作</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://www.figma.com/ai','_blank')">
-            <div class="tool-icon">🎯</div>
-            <div class="tool-name">Figma AI</div>
-            <div class="tool-desc">设计工具，AI 辅助创作</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://www.cursor.com','_blank')">
-            <div class="tool-icon">🖱️</div>
-            <div class="tool-name">Cursor</div>
-            <div class="tool-desc">AI 原生代码编辑器</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://v0.dev','_blank')">
-            <div class="tool-icon">⚡</div>
-            <div class="tool-name">v0.dev</div>
-            <div class="tool-desc">AI 生成 UI 组件代码</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://gamma.app','_blank')">
-            <div class="tool-icon">📊</div>
-            <div class="tool-name">Gamma</div>
-            <div class="tool-desc">AI 生成 PPT 演示文稿</div>
-          </div>
-          <div class="tool-card" onclick="window.open('https://www.descript.com','_blank')">
-            <div class="tool-icon">🎙️</div>
-            <div class="tool-name">Descript</div>
-            <div class="tool-desc">AI 音视频编辑工具</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRAVEL -->
+      <!-- TRAVEL / BUSINESS TRIP -->
       <section id="travel" class="section">
         <div class="page-header">
           <div>
-            <div class="page-title">旅行规划</div>
-            <div class="page-subtitle">世界那么大，想去的地方都要记下来</div>
+            <div class="page-title">出差规划</div>
+            <div class="page-subtitle">外勤目的地与行程明细，记录每一笔差旅开销</div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><span class="card-title">想去的地方</span></div>
-          <div class="destination-tags">
-            <span class="dest-tag active">🏔️ 川西环线</span>
-            <span class="dest-tag">🏖️ 三亚</span>
-            <span class="dest-tag">🗾 日本关西</span>
-            <span class="dest-tag">🌸 大理丽江</span>
-            <span class="dest-tag">🏙️ 上海</span>
-            <span class="dest-tag">🍜 成都</span>
-            <span class="dest-tag">🏔️ 西藏</span>
-            <span class="dest-tag">🌊 青岛</span>
-            <span class="dest-tag" onclick="addDestination(this)">+ 添加</span>
+          <div class="card-header"><span class="card-title">外勤目的地</span></div>
+          <div class="destination-tags" id="destinationTags">
+            <span class="dest-tag" onclick="addDestination()">+ 添加目的地</span>
           </div>
         </div>
         <div class="grid-2">
@@ -1390,7 +1319,7 @@
             <div class="card-header"><span class="card-title">添加行程项目</span></div>
             <div class="form-group">
               <label class="form-label">项目名称</label>
-              <input type="text" class="form-input" id="tripName" placeholder="如：高铁二等座、迪士尼门票、酒店...">
+              <input type="text" class="form-input" id="tripName" placeholder="如：高铁二等座、酒店住宿、客户拜访...">
             </div>
             <div style="display:flex; gap:12px;">
               <div class="form-group" style="flex:1;">
@@ -1401,11 +1330,11 @@
                 <label class="form-label">分类</label>
                 <select class="form-select" id="tripCategory">
                   <option>🚗 交通</option>
-                  <option>🎢 娱乐</option>
                   <option>🏨 住宿</option>
-                  <option>🍽️ 饮食</option>
+                  <option>🍽️ 餐饮</option>
+                  <option>👔 商务</option>
                   <option>🎫 门票</option>
-                  <option>🛍️ 购物</option>
+                  <option>🛍️ 采购</option>
                   <option>📦 其他</option>
                 </select>
               </div>
@@ -1419,11 +1348,11 @@
             </div>
             <div class="trip-cats" id="tripCategories">
               <div class="trip-cat"><div class="icon">🚗</div><div class="name">交通</div><div class="amount" id="cat-交通">¥0</div></div>
-              <div class="trip-cat"><div class="icon">🎢</div><div class="name">娱乐</div><div class="amount" id="cat-娱乐">¥0</div></div>
               <div class="trip-cat"><div class="icon">🏨</div><div class="name">住宿</div><div class="amount" id="cat-住宿">¥0</div></div>
-              <div class="trip-cat"><div class="icon">🍽️</div><div class="name">饮食</div><div class="amount" id="cat-饮食">¥0</div></div>
+              <div class="trip-cat"><div class="icon">🍽️</div><div class="name">餐饮</div><div class="amount" id="cat-餐饮">¥0</div></div>
+              <div class="trip-cat"><div class="icon">👔</div><div class="name">商务</div><div class="amount" id="cat-商务">¥0</div></div>
               <div class="trip-cat"><div class="icon">🎫</div><div class="name">门票</div><div class="amount" id="cat-门票">¥0</div></div>
-              <div class="trip-cat"><div class="icon">🛍️</div><div class="name">购物</div><div class="amount" id="cat-购物">¥0</div></div>
+              <div class="trip-cat"><div class="icon">🛍️</div><div class="name">采购</div><div class="amount" id="cat-采购">¥0</div></div>
               <div class="trip-cat"><div class="icon">📦</div><div class="name">其他</div><div class="amount" id="cat-其他">¥0</div></div>
             </div>
           </div>
@@ -1687,12 +1616,12 @@
         ],
         drinks: [],
         shoes: [
-          { name: "Air Force 1 '07", brand: 'Nike' },
-          { name: '990v6', brand: 'New Balance' },
-          { name: 'Gel-Kayano 30', brand: 'ASICS' },
-          { name: 'Stan Smith', brand: 'adidas' },
-          { name: 'Chuck 70', brand: 'Converse' },
-          { name: 'Classic Leather', brand: 'Reebok' },
+          { name: "Air Force 1 '07", brand: 'Nike', img: null },
+          { name: '990v6', brand: 'New Balance', img: null },
+          { name: 'Gel-Kayano 30', brand: 'ASICS', img: null },
+          { name: 'Stan Smith', brand: 'adidas', img: null },
+          { name: 'Chuck 70', brand: 'Converse', img: null },
+          { name: 'Classic Leather', brand: 'Reebok', img: null },
         ],
         shoeWordsDone: 0,
         directorNotes: [
@@ -1712,6 +1641,7 @@
           { name: '📱 小程序开发', desc: '待办管理微信小程序', status: 'paused', progress: 30 },
         ],
         tripItems: [],
+        tripDestinations: [],
       };
     }
 
@@ -1860,11 +1790,13 @@
       updateHomeProgress();
       updateFinanceSummary();
       updateDrinkStats();
+      renderShoes();
       fetchWeather();
       if (data.directorNotes) renderDirectorNotes();
       if (data.reports) renderReports();
       if (data.ideas) renderIdeas();
       if (data.projects) renderDevProjects();
+      renderDestinations();
       applyAppleEmojis();
     }
 
@@ -2028,50 +1960,28 @@
     }
 
     // ========== DRINK ==========
-    const drinkMenu = {
-      '喜茶': [{name:'烤黑糖波波牛乳茶',cal:312,price:21},{name:'多肉葡萄',cal:180,price:19},{name:'芋泥波波奶茶',cal:380,price:18},{name:'芝士茗茶',cal:120,price:15}],
-      '奈雪': [{name:'霸气芝士草莓',cal:260,price:22},{name:'杨枝甘露',cal:280,price:20},{name:'生椰拿铁',cal:180,price:18}],
-      '瑞幸': [{name:'生椰拿铁',cal:180,price:9.9},{name:'丝绒拿铁',cal:220,price:11.9},{name:'橙C美式',cal:80,price:9.9}],
-      '星巴克': [{name:'拿铁',cal:190,price:30},{name:'美式',cal:15,price:27},{name:'星冰乐',cal:350,price:35}],
-      '茶百道': [{name:'杨枝甘露',cal:250,price:16},{name:'豆乳玉麒麟',cal:300,price:15}],
-      '蜜雪': [{name:'冰鲜柠檬水',cal:50,price:4},{name:'珍珠奶茶',cal:280,price:7},{name:'草莓摇摇奶昔',cal:220,price:8}],
-      'Manner': [{name:'美式',cal:10,price:15},{name:'拿铁',cal:150,price:20},{name:'澳白',cal:140,price:20}],
-      '其他': [{name:'自定义饮品',cal:200,price:15}],
-    };
-
-    function updateDrinkMenu() {
-      const brand = document.getElementById('drinkBrand').value;
-      const select = document.getElementById('drinkItem');
-      const items = drinkMenu[brand] || drinkMenu['其他'];
-      select.innerHTML = items.map(i => `<option value="${i.name}" data-cal="${i.cal}" data-price="${i.price}">${i.name} · ¥${i.price}起</option>`).join('');
-      updateDrinkCalc();
-    }
-
     function updateDrinkCalc() {
-      const opt = document.getElementById('drinkItem').selectedOptions[0];
-      if (!opt) return;
-      let cal = parseInt(opt.dataset.cal) || 200;
-      let price = parseInt(opt.dataset.price) || 15;
-      const sugar = document.getElementById('drinkSugar').value;
-      const size = document.getElementById('drinkSize').value;
-      if (sugar.includes('少糖')) cal *= 0.85;
-      if (sugar.includes('微糖')) cal *= 0.75;
-      if (sugar.includes('无糖')) cal *= 0.6;
-      if (size === '大杯') { cal *= 1.3; price += 2; }
-      document.getElementById('drinkCal').textContent = Math.round(cal);
+      const price = parseFloat(document.getElementById('drinkPriceInput').value) || 0;
+      const cal = parseFloat(document.getElementById('drinkCalInput').value) || 0;
       document.getElementById('drinkPrice').textContent = price;
+      document.getElementById('drinkCal').textContent = Math.round(cal);
     }
-
-    document.getElementById('drinkItem').onchange = updateDrinkCalc;
-    document.getElementById('drinkSugar').onchange = updateDrinkCalc;
-    document.getElementById('drinkSize').onchange = updateDrinkCalc;
 
     function recordDrink() {
-      const brand = document.getElementById('drinkBrand').value;
-      const item = document.getElementById('drinkItem').value;
-      const cal = parseInt(document.getElementById('drinkCal').textContent);
-      const price = parseInt(document.getElementById('drinkPrice').textContent);
-      data.drinks.push({ brand, item, cal, price, date: todayStr() });
+      const brand = document.getElementById('drinkBrandInput').value.trim();
+      const item = document.getElementById('drinkItemInput').value.trim();
+      const price = parseFloat(document.getElementById('drinkPriceInput').value) || 0;
+      const cal = parseFloat(document.getElementById('drinkCalInput').value) || 0;
+      const note = document.getElementById('drinkNoteInput').value.trim();
+      if (!brand && !item) return;
+      data.drinks.push({ brand: brand || '未知', item: item || brand, cal, price, note, date: todayStr() });
+      document.getElementById('drinkBrandInput').value = '';
+      document.getElementById('drinkItemInput').value = '';
+      document.getElementById('drinkPriceInput').value = '0';
+      document.getElementById('drinkCalInput').value = '0';
+      document.getElementById('drinkNoteInput').value = '';
+      document.getElementById('drinkPrice').textContent = '0';
+      document.getElementById('drinkCal').textContent = '0';
       saveData();
       updateDrinkStats();
     }
@@ -2084,11 +1994,11 @@
       document.getElementById('monthDrinkCal').textContent = totalCal;
 
       const list = document.getElementById('drinkHistoryList');
-      if (!monthDrinks.length) { list.textContent = '今天还没喝奶茶哦~'; }
+      if (!monthDrinks.length) { list.textContent = '今天还没喝东西哦~'; }
       else {
         list.innerHTML = monthDrinks.slice(0, 10).map(d => `
-          <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);">
-            <span>${d.brand} · ${d.item}</span>
+          <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">
+            <span>${escapeHtml(d.brand)}${d.item !== d.brand ? ' · ' + escapeHtml(d.item) : ''}${d.note ? ' (' + escapeHtml(d.note) + ')' : ''}</span>
             <span style="color:var(--text-secondary);">¥${d.price} · ${d.cal}kcal</span>
           </div>
         `).join('');
@@ -2096,27 +2006,59 @@
     }
 
     // ========== SHOES ==========
+    let _shoePendingImg = null;
+
+    function handleShoeImgUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('请选择图片文件'); return; }
+      if (file.size > 2 * 1024 * 1024) { alert('图片大小不能超过 2MB'); return; }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        _shoePendingImg = e.target.result;
+        const label = document.getElementById('shoeImgLabel');
+        label.style.backgroundImage = 'url(' + _shoePendingImg + ')';
+        label.style.backgroundSize = 'cover';
+        label.style.backgroundPosition = 'center';
+        label.style.border = '2px solid var(--primary)';
+        label.innerHTML = '';
+      };
+      reader.readAsDataURL(file);
+    }
+
     function addShoe() {
       const name = document.getElementById('shoeNameInput').value.trim();
       const brand = document.getElementById('shoeBrandInput').value.trim();
-      if (!name || !brand) return;
-      data.shoes.push({ name, brand });
+      if (!name && !brand) return;
+      data.shoes.push({ name: name || '未命名', brand: brand || '未知', img: _shoePendingImg || null });
       document.getElementById('shoeNameInput').value = '';
       document.getElementById('shoeBrandInput').value = '';
+      _shoePendingImg = null;
+      const label = document.getElementById('shoeImgLabel');
+      label.style.backgroundImage = '';
+      label.style.border = '2px dashed var(--border)';
+      label.style.background = 'var(--bg)';
+      label.innerHTML = '📷';
       saveData();
       renderShoes();
-      setTimeout(applyAppleEmojis, 10);
     }
 
     function renderShoes() {
       const grid = document.getElementById('shoeGrid');
-      grid.innerHTML = data.shoes.map(s => `
-        <div class="shoe-card">
-          <div class="shoe-img">👟</div>
+      grid.innerHTML = data.shoes.map((s, i) => `
+        <div class="shoe-card" style="position:relative;">
+          <div class="shoe-img" style="${s.img ? 'background:url(' + s.img + ') center/cover no-repeat;padding-bottom:0;' : ''}">${s.img ? '' : '👟'}</div>
+          ${s.img ? '<span class="shoe-delete" onclick="deleteShoe(' + i + ')" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.5);color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;line-height:1;">×</span>' : ''}
           <div class="shoe-name">${escapeHtml(s.name)}</div>
           <div class="shoe-brand">${escapeHtml(s.brand)}</div>
         </div>
       `).join('');
+    }
+
+    function deleteShoe(index) {
+      data.shoes.splice(index, 1);
+      saveData();
+      renderShoes();
     }
 
     // ========== SHOES ENGLISH ==========
@@ -2142,15 +2084,41 @@
     }
 
     // ========== DIRECTOR ==========
+    let _directorPendingImg = null;
+
+    function handleDirectorImgUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('请选择图片文件'); return; }
+      if (file.size > 2 * 1024 * 1024) { alert('图片大小不能超过 2MB'); return; }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        _directorPendingImg = e.target.result;
+        const label = document.getElementById('directorImgLabel');
+        label.style.backgroundImage = 'url(' + _directorPendingImg + ')';
+        label.style.backgroundSize = 'cover';
+        label.style.backgroundPosition = 'center';
+        label.style.border = '2px solid var(--primary)';
+        label.innerHTML = '';
+      };
+      reader.readAsDataURL(file);
+    }
+
     function addDirectorNote() {
       const source = document.getElementById('directorSource').value;
       const type = document.getElementById('directorType').value;
       const title = document.getElementById('directorTitleInput').value.trim();
       const content = document.getElementById('directorContentInput').value.trim();
-      if (!title || !content) return;
-      data.directorNotes.push({ id: Date.now(), source, type, title, content, date: todayStr() });
+      if (!title && !content && !_directorPendingImg) return;
+      data.directorNotes.push({ id: Date.now(), source, type, title: title || '未命名', content: content || '', img: _directorPendingImg || null, date: todayStr() });
       document.getElementById('directorTitleInput').value = '';
       document.getElementById('directorContentInput').value = '';
+      _directorPendingImg = null;
+      const label = document.getElementById('directorImgLabel');
+      label.style.backgroundImage = '';
+      label.style.border = '2px dashed var(--border)';
+      label.style.background = 'var(--bg)';
+      label.innerHTML = '📷';
       saveData();
       renderDirectorNotes();
     }
@@ -2164,6 +2132,7 @@
       const types = {'鞋款分享':AE('👟',18),'开发建议':AE('🔧',18),'市场趋势':AE('📈',18),'其他':AE('📌',18)};
       list.innerHTML = data.directorNotes.map(n => `
         <div class="card" style="margin-bottom:12px;">
+          ${n.img ? `<div style="width:100%;max-height:220px;overflow:hidden;border-radius:var(--radius-sm);margin-bottom:10px;cursor:pointer;" onclick="this.style.maxHeight=this.style.maxHeight==='none'?'220px':'none'"><img src="${n.img}" style="width:100%;object-fit:cover;" /></div>` : ''}
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
             <div>
               <span style="font-weight:700;margin-right:8px;">${escapeHtml(n.title)}</span>
@@ -2250,14 +2219,32 @@
       });
     }
 
-    function addDestination(el) {
-      const name = prompt('想去哪里？');
-      if (name) {
-        const tag = document.createElement('span');
-        tag.className = 'dest-tag';
-        tag.textContent = name;
-        el.parentElement.insertBefore(tag, el);
+    function addDestination() {
+      const name = prompt('添加外勤目的地：');
+      if (name && name.trim()) {
+        if (!data.tripDestinations) data.tripDestinations = [];
+        data.tripDestinations.push(name.trim());
+        saveData();
+        renderDestinations();
       }
+    }
+
+    function renderDestinations() {
+      const container = document.getElementById('destinationTags');
+      if (!data.tripDestinations || !data.tripDestinations.length) {
+        container.innerHTML = '<span class="dest-tag" onclick="addDestination()">+ 添加目的地</span>';
+        return;
+      }
+      container.innerHTML = data.tripDestinations.map((d, i) => `
+        <span class="dest-tag" style="cursor:default;">${escapeHtml(d)} <span onclick="deleteDestination(${i})" style="cursor:pointer;margin-left:4px;font-size:11px;color:var(--text-light);">×</span></span>
+      `).join('') + '<span class="dest-tag" onclick="addDestination()">+ 添加目的地</span>';
+    }
+
+    function deleteDestination(index) {
+      if (!data.tripDestinations) return;
+      data.tripDestinations.splice(index, 1);
+      saveData();
+      renderDestinations();
     }
 
     // ========== WEATHER ==========
@@ -2316,6 +2303,32 @@
         saveData();
         fetchWeather();
       }
+    }
+
+    // ========== TRANSLATE SENTENCE ==========
+    async function translateSentence(btn) {
+      const card = btn.closest('.word-card');
+      const exampleDiv = card.querySelector('.word-example');
+      const existing = card.querySelector('.word-translation');
+      if (existing) { existing.remove(); btn.textContent = '🌐 翻译'; return; }
+      btn.textContent = '⏳ 翻译中...';
+      btn.disabled = true;
+      const sentence = exampleDiv.textContent.trim();
+      try {
+        const resp = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(sentence)}`);
+        const d = await resp.json();
+        const zh = d[0].map(p => p[0]).join('');
+        const transDiv = document.createElement('div');
+        transDiv.className = 'word-translation';
+        transDiv.style.cssText = 'margin-top:8px;padding:8px 10px;background:#E8F5E9;border-radius:8px;font-size:13px;color:#2E7D32;line-height:1.5;';
+        transDiv.textContent = '🌐 ' + zh;
+        exampleDiv.parentElement.appendChild(transDiv);
+        btn.textContent = '🔄 隐藏';
+      } catch(e) {
+        showToast('翻译失败，请检查网络', 'error');
+        btn.textContent = '🌐 翻译';
+      }
+      btn.disabled = false;
     }
 
     // ========== IDEAS ==========
