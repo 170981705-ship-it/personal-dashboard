@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A3B8C8"/>
+      <stop offset="100%" style="stop-color:#7B93A4"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#g)"/>
+  <!-- Icon: stylized dashboard grid -->
+  <g transform="translate(112,112)" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top bar -->
+    <rect x="0" y="0" width="288" height="48" rx="14"/>
+    <!-- 2x2 grid -->
+    <rect x="0" y="76" width="132" height="132" rx="16"/>
+    <rect x="156" y="76" width="132" height="132" rx="16"/>
+    <rect x="0" y="232" width="132" height="80" rx="16"/>
+    <rect x="156" y="232" width="132" height="80" rx="16"/>
+  </g>
+</svg>

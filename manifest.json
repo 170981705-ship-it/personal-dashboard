@@ -1,0 +1,19 @@
+{
+  "name": "嘣啊哈·SHI 个人工作台",
+  "short_name": "工作台",
+  "description": "集待办、饮食、财务、运动、鞋类英语、少董分享、汇报于一体的个人工作台",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F4F7",
+  "theme_color": "#7B93A4",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
