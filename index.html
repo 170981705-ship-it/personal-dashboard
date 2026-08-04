@@ -641,7 +641,7 @@
       <!-- HOME -->
       <section id="home" class="section active">
         <div class="welcome-banner">
-          <div class="welcome-date" id="welcomeDate">8月3日 · 周一</div>
+          <div class="welcome-date" id="welcomeDate"><script>document.write((function(){var d=new Date((new Date()).toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var w=['周日','周一','周二','周三','周四','周五','周六'];return(d.getMonth()+1)+'月'+d.getDate()+'日 · '+w[d.getDay()];})())</script></div>
           <div class="welcome-name">嗨，<span id="welcomeName">朋友</span> 👋</div>
           <div class="welcome-quote">不必羡慕别人，你也在成为更好的路上。<br>今天也要好好吃饭、好好流汗。</div>
           <div class="welcome-progress">
@@ -2300,10 +2300,15 @@
     // ========== WEATHER ==========
     async function fetchWeather() {
       const city = data.city || 'Beijing';
+      const tempEl = document.getElementById('weatherTemp');
+      const descEl = document.getElementById('weatherDesc');
+      if (tempEl) tempEl.textContent = '...';
+      if (descEl) descEl.textContent = '加载中...';
       try {
         const resp = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1&_t=${Date.now()}`, {
           cache: 'no-store'
         });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const d = await resp.json();
         const cur = d.current_condition[0];
         document.getElementById('weatherTemp').textContent = cur.temp_C + '°';
@@ -2326,7 +2331,10 @@
             }).join('');
         }
       } catch(e) {
-        console.log('Weather fetch failed, using defaults');
+        console.log('Weather fetch failed:', e);
+        if (tempEl) tempEl.textContent = '--';
+        if (descEl) descEl.textContent = '获取失败，点击重试';
+        document.getElementById('weatherDesc').onclick = fetchWeather;
       }
     }
 
