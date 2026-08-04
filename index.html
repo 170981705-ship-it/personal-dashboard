@@ -641,7 +641,7 @@
       <!-- HOME -->
       <section id="home" class="section active">
         <div class="welcome-banner">
-          <div class="welcome-date" id="welcomeDate"><script>document.write((function(){var d=new Date((new Date()).toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var w=['周日','周一','周二','周三','周四','周五','周六'];return(d.getMonth()+1)+'月'+d.getDate()+'日 · '+w[d.getDay()];})())</script></div>
+          <div class="welcome-date" id="welcomeDate">--月--日 · --</div>
           <div class="welcome-name">嗨，<span id="welcomeName">朋友</span> 👋</div>
           <div class="welcome-quote">不必羡慕别人，你也在成为更好的路上。<br>今天也要好好吃饭、好好流汗。</div>
           <div class="welcome-progress">
@@ -2318,16 +2318,19 @@
         document.getElementById('weatherDesc').textContent =
           (cur.lang_zh ? cur.lang_zh[0].value : cur.weatherDesc[0].value) + ' · 体感';
 
-        // Forecast
+        // Forecast - 使用北京时间计算星期
         const forecastRow = document.querySelector('.forecast-row');
         if (forecastRow && d.weather) {
           const days = d.weather.slice(0, 6);
+          const ws = ['周日','周一','周二','周三','周四','周五','周六'];
+          const getWeekday = (dateStr) => {
+            const d = new Date(new Date(dateStr).toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));
+            return ws[d.getDay()];
+          };
           forecastRow.innerHTML =
             '<div class="forecast-day"><div class="day">今天</div><div class="icon">' + getWeatherIcon(cur.weatherCode) + '</div><div class="temp">' + cur.temp_C + '°</div></div>' +
             days.map((w, i) => {
-              const d = new Date(w.date);
-              const ws = ['周日','周一','周二','周三','周四','周五','周六'];
-              return '<div class="forecast-day"><div class="day">' + ws[d.getDay()] + '</div><div class="icon">' + getWeatherIcon(w.hourly[4].weatherCode) + '</div><div class="temp">' + w.maxtempC + '°/' + w.mintempC + '°</div></div>';
+              return '<div class="forecast-day"><div class="day">' + getWeekday(w.date) + '</div><div class="icon">' + getWeatherIcon(w.hourly[4].weatherCode) + '</div><div class="temp">' + w.maxtempC + '°/' + w.mintempC + '°</div></div>';
             }).join('');
         }
       } catch(e) {
@@ -2676,6 +2679,15 @@
     window.addEventListener('unhandledrejection', e => {
       console.error('[Unhandled Promise]:', e.reason);
     });
+
+    // 立即更新欢迎页日期（北京时区）
+    (function(){
+      const d = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));
+      const w = ['周日','周一','周二','周三','周四','周五','周六'];
+      const str = (d.getMonth()+1)+'月'+d.getDate()+'日 · '+w[d.getDay()];
+      const el = document.getElementById('welcomeDate');
+      if (el) el.textContent = str;
+    })();
   </script>
 </body>
 </html>
