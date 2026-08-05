@@ -1,10 +1,10 @@
 const CACHE_VERSION = 'v8';
 const CACHE = 'workbench-' + CACHE_VERSION;
 const PRECACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon.svg'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon.svg'
 ];
 
 self.addEventListener('install', e => {
