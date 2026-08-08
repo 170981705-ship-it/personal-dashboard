@@ -1102,116 +1102,16 @@
 
         <!-- 鞋类商务英语词汇 -->
         <div class="card">
-          <div class="card-header"><span class="card-title">鞋类行业英语</span></div>
-          <div id="shoeWordList">
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">upper</span><span class="word-phonetic">/ˈʌpər/</span></div>
-                <div class="word-pos">n. 鞋面</div>
-                <div class="word-example">The upper is made of premium full-grain leather.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
+          <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="card-title">鞋类行业英语</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="date" id="shoeWordDatePicker" class="form-input" style="width:140px;font-size:13px;padding:6px 10px;" onchange="changeShoeWordDate(this.value)">
+              <span id="shoeWordDateLabel" style="font-size:12px;color:var(--text-secondary);"></span>
             </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">outsole</span><span class="word-phonetic">/ˈaʊtsoʊl/</span></div>
-                <div class="word-pos">n. 外底，大底</div>
-                <div class="word-example">The rubber outsole provides excellent traction.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">midsole</span><span class="word-phonetic">/ˈmɪdsoʊl/</span></div>
-                <div class="word-pos">n. 中底</div>
-                <div class="word-example">The EVA midsole offers superior cushioning and rebound.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">insole</span><span class="word-phonetic">/ˈɪnsoʊl/</span></div>
-                <div class="word-pos">n. 鞋垫，内底</div>
-                <div class="word-example">The memory foam insole molds to your foot shape.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">cushioning</span><span class="word-phonetic">/ˈkʊʃənɪŋ/</span></div>
-                <div class="word-pos">n. 缓震，缓冲</div>
-                <div class="word-example">The Zoom Air cushioning system delivers responsive energy return.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">breathable</span><span class="word-phonetic">/ˈbriːðəbl/</span></div>
-                <div class="word-pos">adj. 透气的</div>
-                <div class="word-example">The knit upper is highly breathable for summer wear.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">waterproof</span><span class="word-phonetic">/ˈwɔːtərpruːf/</span></div>
-                <div class="word-pos">adj. 防水的</div>
-                <div class="word-example">The GORE-TEX membrane makes the shoe fully waterproof.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">durability</span><span class="word-phonetic">/ˌdjʊərəˈbɪləti/</span></div>
-                <div class="word-pos">n. 耐用性，耐久度</div>
-                <div class="word-example">The carbon rubber outsole significantly improves durability.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">stitching</span><span class="word-phonetic">/ˈstɪtʃɪŋ/</span></div>
-                <div class="word-pos">n. 缝线，车线</div>
-                <div class="word-example">Double stitching reinforces high-stress areas of the shoe.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">arch support</span><span class="word-phonetic">/ɑːrtʃ səˈpɔːrt/</span></div>
-                <div class="word-pos">n. 足弓支撑</div>
-                <div class="word-example">This model features enhanced arch support for flat feet.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">heel counter</span><span class="word-phonetic">/hiːl ˈkaʊntər/</span></div>
-                <div class="word-pos">n. 后跟稳定片</div>
-                <div class="word-example">An external heel counter locks your foot in place.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
-            <div class="word-card">
-              <div class="word-check" onclick="toggleShoeWord(this)">✓</div>
-              <div style="flex:1;">
-                <div><span class="word-title">flex groove</span><span class="word-phonetic">/fleks ɡruːv/</span></div>
-                <div class="word-pos">n. 弯折槽</div>
-                <div class="word-example">Deep flex grooves allow natural forefoot motion.</div>
-              </div>
-              <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
-            </div>
+          </div>
+          <div id="shoeWordList"></div>
+          <div style="margin-top:12px;padding:10px;background:var(--primary-soft);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+            <span id="shoeEnglishProgress">0 / 5 已完成</span> · 每日5个新单词，打勾即标记完成
           </div>
         </div>
       </section>
@@ -1370,7 +1270,13 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><span class="card-title">灵感库</span></div>
+          <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="card-title">灵感库</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="date" id="ideaDateFilter" class="form-input" style="width:140px;font-size:13px;padding:6px 10px;" onchange="renderIdeas()">
+              <button class="btn btn-soft" style="font-size:12px;padding:4px 10px;" onclick="clearIdeaDateFilter()">全部</button>
+            </div>
+          </div>
           <div id="ideaList">
             <div class="idea-card">
               <span class="idea-delete" onclick="this.parentElement.remove()">×</span>
@@ -1629,6 +1535,75 @@
       }
     }
 
+    // ========== SHOE WORDS LIBRARY ==========
+    const SHOE_WORDS_LIBRARY = [
+      { word: 'upper', phonetic: '/ˈʌpər/', pos: 'n. 鞋面', example: 'The upper is made of premium full-grain leather.' },
+      { word: 'outsole', phonetic: '/ˈaʊtsoʊl/', pos: 'n. 外底，大底', example: 'The rubber outsole provides excellent traction.' },
+      { word: 'midsole', phonetic: '/ˈmɪdsoʊl/', pos: 'n. 中底', example: 'The EVA midsole offers superior cushioning and rebound.' },
+      { word: 'insole', phonetic: '/ˈɪnsoʊl/', pos: 'n. 鞋垫，内底', example: 'The memory foam insole molds to your foot shape.' },
+      { word: 'cushioning', phonetic: '/ˈkʊʃənɪŋ/', pos: 'n. 缓震，缓冲', example: 'The Zoom Air cushioning system delivers responsive energy return.' },
+      { word: 'breathable', phonetic: '/ˈbriːðəbl/', pos: 'adj. 透气的', example: 'The knit upper is highly breathable for summer wear.' },
+      { word: 'waterproof', phonetic: '/ˈwɔːtərpruːf/', pos: 'adj. 防水的', example: 'The GORE-TEX membrane makes the shoe fully waterproof.' },
+      { word: 'durability', phonetic: '/ˌdjʊərəˈbɪləti/', pos: 'n. 耐用性，耐久度', example: 'The carbon rubber outsole significantly improves durability.' },
+      { word: 'stitching', phonetic: '/ˈstɪtʃɪŋ/', pos: 'n. 缝线，车线', example: 'Double stitching reinforces high-stress areas of the shoe.' },
+      { word: 'arch support', phonetic: '/ɑːrtʃ səˈpɔːrt/', pos: 'n. 足弓支撑', example: 'This model features enhanced arch support for flat feet.' },
+      { word: 'heel counter', phonetic: '/hiːl ˈkaʊntər/', pos: 'n. 后跟稳定片', example: 'An external heel counter locks your foot in place.' },
+      { word: 'flex groove', phonetic: '/fleks ɡruːv/', pos: 'n. 弯折槽', example: 'Deep flex grooves allow natural forefoot motion.' },
+      { word: 'tongue', phonetic: '/tʌŋ/', pos: 'n. 鞋舌', example: 'The padded tongue prevents lace pressure on the instep.' },
+      { word: 'collar', phonetic: '/ˈkɒlər/', pos: 'n. 鞋口，鞋领', example: 'The padded collar provides ankle comfort and support.' },
+      { word: 'eyestay', phonetic: '/ˈaɪsteɪ/', pos: 'n. 鞋带孔部件', example: 'The reinforced eyestay ensures lace holes never tear.' },
+      { word: 'toe box', phonetic: '/toʊ bɒks/', pos: 'n. 鞋头空间', example: 'A spacious toe box allows natural toe splay during running.' },
+      { word: 'heel tab', phonetic: '/hiːl tæb/', pos: 'n. 后跟提带', example: 'The heel tab makes it easy to pull the shoe on.' },
+      { word: 'suede', phonetic: '/sweɪd/', pos: 'n. 绒面革', example: 'The upper combines smooth leather with suede overlays.' },
+      { word: 'mesh', phonetic: '/meʃ/', pos: 'n. 网布', example: 'Open mesh panels enhance ventilation throughout the upper.' },
+      { word: 'overlay', phonetic: '/ˈoʊvərleɪ/', pos: 'n. 支撑覆面', example: 'Synthetic overlays provide structure without adding weight.' },
+      { word: 'lug pattern', phonetic: '/lʌɡ ˈpætərn/', pos: 'n. 鞋底花纹', example: 'The aggressive lug pattern grips well on muddy trails.' },
+      { word: 'drop', phonetic: '/drɒp/', pos: 'n. 前后掌落差', example: 'This shoe has an 8mm drop from heel to toe.' },
+      { word: 'stack height', phonetic: '/stæk haɪt/', pos: 'n. 中底厚度', example: 'The generous stack height provides plush cushioning.' },
+      { word: 'last', phonetic: '/læst/', pos: 'n. 鞋楦', example: 'This shoe is built on a wide last for comfort.' },
+      { word: 'vamp', phonetic: '/væmp/', pos: 'n. 鞋前帮', example: 'The vamp features a seamless construction to reduce irritation.' },
+      { word: 'quarter', phonetic: '/ˈkwɔːrtər/', pos: 'n. 鞋后帮', example: 'The quarter panel provides lateral stability.' },
+      { word: 'foxing', phonetic: '/ˈfɒksɪŋ/', pos: 'n. 围条（帆布鞋侧边橡胶条）', example: 'The white foxing stripe is a classic design element.' },
+      { word: 'rand', phonetic: '/rænd/', pos: 'n. 防撞橡胶边', example: 'The protective rand shields the toe from rock impacts.' },
+      { word: 'gusseted tongue', phonetic: '/ˈɡʌsɪtɪd tʌŋ/', pos: 'n. 连体鞋舌', example: 'The gusseted tongue keeps debris out of the shoe.' },
+      { word: 'shank', phonetic: '/ʃæŋk/', pos: 'n. 腰铁，勾心', example: 'The TPU shank provides torsional rigidity.' },
+      { word: 'heel-to-toe offset', phonetic: '/hiːl tuː toʊ ˈɔːfset/', pos: 'n. 前后落差', example: 'A zero heel-to-toe offset promotes natural running form.' },
+      { word: 'rocker geometry', phonetic: '/ˈrɒkər dʒiˈɒmətri/', pos: 'n. 弧形鞋底设计', example: 'The rocker geometry facilitates smooth heel-to-toe transition.' },
+      { word: 'toe spring', phonetic: '/toʊ sprɪŋ/', pos: 'n. 鞋头上翘', example: 'The moderate toe spring reduces forefoot strain.' },
+      { word: 'heel clip', phonetic: '/hiːl klɪp/', pos: 'n. 后跟夹', example: 'The external heel cup and heel clip work together for stability.' },
+      { word: 'speed lacing', phonetic: '/spiːd ˈleɪsɪŋ/', pos: 'n. 快速系带系统', example: 'Speed lacing allows quick on and off during transitions.' },
+      { word: 'gaiter', phonetic: '/ˈɡeɪtər/', pos: 'n. 鞋套，防沙套', example: 'The integrated gaiter keeps sand and pebbles out.' },
+      { word: 'aggressive tread', phonetic: '/əˈɡresɪv tred/', pos: 'n. 深纹路鞋底', example: 'Aggressive tread patterns excel on technical terrain.' },
+      { word: 'compression molded', phonetic: '/kəmˈpreʃən moʊldɪd/', pos: 'adj. 压缩成型的', example: 'The compression molded EVA midsole offers consistent density.' },
+      { word: 'welded construction', phonetic: '/ˈweldɪd kənˈstrʌkʃn/', pos: 'n. 热熔焊接工艺', example: 'Welded construction eliminates stitching for a seamless upper.' },
+      { word: 'cement construction', phonetic: '/sɪˈment kənˈstrʌkʃn/', pos: 'n. 胶粘工艺', example: 'Cement construction keeps the shoe lightweight and flexible.' },
+      { word: 'welted construction', phonetic: '/ˈweltɪd kənˈstrʌkʃn/', pos: 'n. 沿条工艺', example: 'Goodyear welted construction allows for resoling.' },
+      { word: 'blake stitch', phonetic: '/bleɪk stɪtʃ/', pos: 'n. 布雷克缝制工艺', example: 'Blake stitch offers a sleeker profile than Goodyear welt.' },
+      { word: 'vulcanized', phonetic: '/ˈvʌlkənaɪzd/', pos: 'adj. 硫化工艺的', example: 'Vulcanized rubber soles are flexible and durable.' },
+      { word: 'cupsole', phonetic: '/ˈkʌpsoʊl/', pos: 'n. 杯形大底', example: 'The cupsole construction provides excellent board feel.' },
+      { word: 'shank board', phonetic: '/ʃæŋk bɔːrd/', pos: 'n. 中底板', example: 'A rigid shank board prevents stone bruising.' },
+      { word: 'strobel board', phonetic: '/ˈstroʊbəl bɔːrd/', pos: 'n. 斯特罗贝尔中底布', example: 'The Strobel board gives the shoe its flexible foundation.' },
+      { word: 'lasting', phonetic: '/ˈlæstɪŋ/', pos: 'n. 绷楦工艺', example: 'Hand lasting requires skilled craftsmanship.' },
+      { word: 'skiving', phonetic: '/ˈskaɪvɪŋ/', pos: 'n. 削薄工艺', example: 'Skiving reduces bulk at overlapping leather pieces.' },
+      { word: 'burnishing', phonetic: '/ˈbɜːrnɪʃɪŋ/', pos: 'n. 抛光工艺', example: 'Burnishing creates a rich patina on leather toes.' }
+    ];
+
+    // 根据日期获取当日单词（5个）
+    function getDailyShoeWords(dateStr) {
+      const seed = dateStr.split('-').join('');
+      const rng = (s) => {
+        let x = parseInt(s) % 2147483647;
+        return () => (x = (x * 16807) % 2147483647) / 2147483647;
+      };
+      const rand = rng(seed);
+      const indices = [];
+      while (indices.length < 5) {
+        const idx = Math.floor(rand() * SHOE_WORDS_LIBRARY.length);
+        if (!indices.includes(idx)) indices.push(idx);
+      }
+      return indices.map(i => SHOE_WORDS_LIBRARY[i]);
+    }
+
     function getDefaultData() {
       return {
         userName: '嘣啊哈·SHI',
@@ -1659,7 +1634,7 @@
           { name: 'Chuck 70', brand: 'Converse', img: null },
           { name: 'Classic Leather', brand: 'Reebok', img: null },
         ],
-        shoeWordsDone: 0,
+        shoeWordsHistory: {}, // { '2026-08-08': [0,2,4] } 日期->已完成单词索引数组
         directorNotes: [
           { id: 1, source: '董助', type: '鞋款分享', title: '2026秋冬新款厚底运动鞋趋势', content: '董助分享了近期米兰展会上看到的厚底运动鞋趋势，建议关注EVA+橡胶复合大底工艺，配色以雾屿海岩蓝+米白为主色调，适合国内市场。', date: '2026-08-01' },
           { id: 2, source: '总裁', type: '开发建议', title: '鞋面材料升级方案', content: '总裁建议下一季产品尝试使用飞织+TPU热熔工艺替代传统网布，提升透气性和支撑性，同时降低30%材料成本。', date: '2026-07-28' },
@@ -2104,25 +2079,82 @@
     }
 
     // ========== SHOES ENGLISH ==========
-    function toggleShoeWord(el) {
+    let currentShoeWordDate = bjDateStr();
+
+    function getShoeWordsForDate(dateStr) {
+      return getDailyShoeWords(dateStr);
+    }
+
+    function getCompletedWordsForDate(dateStr) {
+      if (!data.shoeWordsHistory) data.shoeWordsHistory = {};
+      return data.shoeWordsHistory[dateStr] || [];
+    }
+
+    function toggleShoeWord(el, wordIndex) {
       const card = el.closest('.word-card');
-      card.classList.toggle('done');
-      el.textContent = card.classList.contains('done') ? '✓' : '';
-      data.shoeWordsDone = document.querySelectorAll('#shoeWordList .word-card.done').length;
-      document.getElementById('shoeEnglishProgress').textContent = data.shoeWordsDone + ' / 12 已掌握';
+      const isDone = card.classList.toggle('done');
+      el.textContent = isDone ? '✓' : '';
+      
+      if (!data.shoeWordsHistory) data.shoeWordsHistory = {};
+      const completed = data.shoeWordsHistory[currentShoeWordDate] || [];
+      
+      if (isDone && !completed.includes(wordIndex)) {
+        completed.push(wordIndex);
+      } else if (!isDone && completed.includes(wordIndex)) {
+        const idx = completed.indexOf(wordIndex);
+        if (idx > -1) completed.splice(idx, 1);
+      }
+      
+      data.shoeWordsHistory[currentShoeWordDate] = completed;
+      document.getElementById('shoeEnglishProgress').textContent = completed.length + ' / 5 已完成';
       saveData();
     }
 
+    function changeShoeWordDate(dateStr) {
+      currentShoeWordDate = dateStr;
+      renderShoeWords();
+    }
+
+    function renderShoeWords() {
+      const container = document.getElementById('shoeWordList');
+      const datePicker = document.getElementById('shoeWordDatePicker');
+      const dateLabel = document.getElementById('shoeWordDateLabel');
+      if (!container) return;
+      
+      // 设置日期选择器默认值
+      if (datePicker && !datePicker.value) {
+        datePicker.value = bjDateStr();
+      }
+      
+      const today = bjDateStr();
+      const isToday = currentShoeWordDate === today;
+      if (dateLabel) {
+        dateLabel.textContent = isToday ? '今日' : currentShoeWordDate;
+      }
+      
+      const words = getShoeWordsForDate(currentShoeWordDate);
+      const completed = getCompletedWordsForDate(currentShoeWordDate);
+      
+      container.innerHTML = words.map((w, i) => {
+        const isDone = completed.includes(i);
+        return `
+          <div class="word-card ${isDone ? 'done' : ''}">
+            <div class="word-check" onclick="toggleShoeWord(this, ${i})">${isDone ? '✓' : ''}</div>
+            <div style="flex:1;">
+              <div><span class="word-title">${escapeHtml(w.word)}</span><span class="word-phonetic">${escapeHtml(w.phonetic)}</span></div>
+              <div class="word-pos">${escapeHtml(w.pos)}</div>
+              <div class="word-example">${escapeHtml(w.example)}</div>
+            </div>
+            <button class="btn btn-soft" style="font-size:11px;padding:4px 8px;white-space:nowrap;" onclick="translateSentence(this)">🌐 翻译</button>
+          </div>
+        `;
+      }).join('');
+      
+      document.getElementById('shoeEnglishProgress').textContent = completed.length + ' / 5 已完成';
+    }
+
     function updateShoeWordState() {
-      const cards = document.querySelectorAll('#shoeWordList .word-card');
-      cards.forEach((card, i) => {
-        const check = card.querySelector('.word-check');
-        if (data.shoeWordsDone > i) {
-          card.classList.add('done');
-          check.textContent = '✓';
-        }
-      });
-      document.getElementById('shoeEnglishProgress').textContent = data.shoeWordsDone + ' / 12 已掌握';
+      renderShoeWords();
     }
 
     // ========== DIRECTOR ==========
@@ -2448,8 +2480,18 @@
       btn.textContent = '⏳ 翻译中...';
       btn.disabled = true;
       const sentence = exampleDiv.textContent.trim();
+      
+      // 带超时的 fetch
+      const fetchWithTimeout = (url, ms = 5000) => {
+        return Promise.race([
+          fetch(url),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
+        ]);
+      };
+      
       try {
-        const resp = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(sentence)}`);
+        const resp = await fetchWithTimeout(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(sentence)}`);
+        if (!resp.ok) throw new Error('network');
         const d = await resp.json();
         const zh = d[0].map(p => p[0]).join('');
         const transDiv = document.createElement('div');
@@ -2459,8 +2501,25 @@
         exampleDiv.parentElement.appendChild(transDiv);
         btn.textContent = '🔄 隐藏';
       } catch(e) {
-        showToast('翻译失败，请检查网络', 'error');
-        btn.textContent = '🌐 翻译';
+        // 备用：使用 MyMemory API
+        try {
+          btn.textContent = '⏳ 备用翻译...';
+          const resp2 = await fetchWithTimeout(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(sentence)}&langpair=en|zh`, 5000);
+          const d2 = await resp2.json();
+          if (d2.responseStatus === 200) {
+            const transDiv = document.createElement('div');
+            transDiv.className = 'word-translation';
+            transDiv.style.cssText = 'margin-top:8px;padding:8px 10px;background:#E8F5E9;border-radius:8px;font-size:13px;color:#2E7D32;line-height:1.5;';
+            transDiv.textContent = '🌐 ' + d2.responseData.translatedText;
+            exampleDiv.parentElement.appendChild(transDiv);
+            btn.textContent = '🔄 隐藏';
+          } else {
+            throw new Error('api error');
+          }
+        } catch(e2) {
+          showToast('翻译失败，请检查网络', 'error');
+          btn.textContent = '🌐 翻译';
+        }
       }
       btn.disabled = false;
     }
@@ -2584,11 +2643,28 @@
       renderIdeas();
     }
 
+    function clearIdeaDateFilter() {
+      document.getElementById('ideaDateFilter').value = '';
+      renderIdeas();
+    }
+
     function renderIdeas() {
       const list = document.getElementById('ideaList');
       if (!list) return;
+      const dateFilter = document.getElementById('ideaDateFilter')?.value;
       const tags = { '创意':AE('💡',16),'工作':AE('💼',16),'学习':AE('📚',16),'生活':AE('🏠',16),'项目':AE('🚀',16) };
-      list.innerHTML = data.ideas.map(i => `
+      
+      let filtered = data.ideas;
+      if (dateFilter) {
+        filtered = data.ideas.filter(i => i.time && i.time.startsWith(dateFilter));
+      }
+      
+      if (filtered.length === 0) {
+        list.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text-light);font-size:14px;">${dateFilter ? '该日期暂无灵感记录' : '暂无灵感记录'}</div>`;
+        return;
+      }
+      
+      list.innerHTML = filtered.map(i => `
         <div class="idea-card">
           <span class="idea-delete" onclick="deleteIdea(${i.id})">×</span>
           <div class="idea-text">${escapeHtml(i.text)}</div>
